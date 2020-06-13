@@ -10,7 +10,6 @@ function getResult(a,b,c){
     } else if (d > 0) {
         x.push((-b + Math.sqrt(d)) / (2 * a));
         x.push((-b - Math.sqrt(d)) / (2 * a));
-        Math.sqrt(13);
     }
     return x;
 }
