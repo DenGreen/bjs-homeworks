@@ -26,41 +26,45 @@ let showSolutionsMessage = (a,b,c) => {
 }
 
 let getAverageScore = (data) => {
-    console.log(getAverageMark(data));
+    return getAverageMark(data);
 }
 
 let getAverageMark = (marks) => {
     let summLength = 0;
     let average = 0;
     let key = {};
-    for (let subject in marks) {
-        let summ = 0;
-        for (let i = 0; i < marks[subject].length; i++ ) {
-            summ += marks[subject][i];
-        }
-        summLength++;
-        average += summ / marks[subject].length;
-        key[subject] = summ / marks[subject].length;
+    if (marks) {
+        for (let subject in marks) {
+            let summ = 0;
+            for (let i = 0; i < marks[subject].length; i++ ) {
+                summ += marks[subject][i];
+            }
+            summLength++;
+            average += summ / marks[subject].length;
+            key[subject] = summ / marks[subject].length;
+         }
+        key.average = average / summLength;
+        return key;
+    } else {
+        return 'Вы не ввели данные';
     }
-    key.average = average / summLength;
-    return key;
 } 
 
 let getPersonData = (secretData) => {
-    console.log(getDecodedValue(secretData));
+    return getDecodedValue(secretData);
 }
 
 let getDecodedValue = (secret) => {
     let arr = {};
     for (let property in secret) {
         if (property === 'aaa' && secret[property] === 1) {
-            arr.firstName = 'Эмиль';
+            arr.firstName = 'Эмильо';
         } else if (property === 'bbb' && secret[property] === 0) {
             arr.lastName = 'Родриго';
         } else if (property === 'aaa' && secret[property] === 0) {
             arr.firstName = 'Родриго';
         } else if (property === 'bbb' && secret[property] === 1) {
-            arr.lastName = 'Эмиль';
+            arr.lastName = 'Эмильо';
         }
     }
     return(arr);
