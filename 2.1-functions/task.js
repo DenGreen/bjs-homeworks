@@ -26,46 +26,48 @@ let showSolutionsMessage = (a,b,c) => {
 }
 
 let getAverageScore = (data) => {
-    return getAverageMark(data);
+    let summ = {};
+    if (data) {
+        for (let subject in data) {
+            summ[subject] = getAverageMark(data[subject]);
+        }
+        summ.average = getAverageMark(Object.values(summ));
+        return summ; 
+    } else {
+        return  'Вы не ввели данные';
+    }
 }
 
 let getAverageMark = (marks) => {
-    let summLength = 0;
-    let average = 0;
-    let key = {};
-    if (marks) {
-        for (let subject in marks) {
-            let summ = 0;
-            for (let i = 0; i < marks[subject].length; i++ ) {
-                summ += marks[subject][i];
-            }
-            summLength++;
-            average += summ / marks[subject].length;
-            key[subject] = summ / marks[subject].length;
-         }
-        key.average = average / summLength;
-        return key;
-    } else {
-        return 'Вы не ввели данные';
+    let averageMark = 0;
+    let i = 0;
+    if (marks.length < 1) {
+        return 0;
     }
+    for (let mark of marks) {
+        averageMark += mark;
+        i++;
+    }
+    return averageMark / i;
 } 
 
 let getPersonData = (secretData) => {
-    return getDecodedValue(secretData);
+    let decrypted = {};
+    for (let data in secretData) {
+        decrypted[getDecodedValue(data)] = getDecodedValue(secretData[data]);
+    }
+    return decrypted;
 }
 
 let getDecodedValue = (secret) => {
-    let arr = {};
-    for (let property in secret) {
-        if (property === 'aaa' && secret[property] === 1) {
-            arr.firstName = 'Эмильо';
-        } else if (property === 'bbb' && secret[property] === 0) {
-            arr.lastName = 'Родриго';
-        } else if (property === 'aaa' && secret[property] === 0) {
-            arr.firstName = 'Родриго';
-        } else if (property === 'bbb' && secret[property] === 1) {
-            arr.lastName = 'Эмильо';
-        }
+    switch (secret) {
+        case 'aaa':
+            return 'firstName';
+        case 'bbb':
+            return 'lastName';
+        case 1:
+            return 'Эмильо';
+        case 0:
+            return 'Родриго';
     }
-    return(arr);
 }
