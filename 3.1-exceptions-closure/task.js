@@ -35,7 +35,7 @@ class Triangle {
     getArea() {
         let perimeterTrn = this.getPerimeter() / 2;
         let s = Math.sqrt(perimeterTrn  * (perimeterTrn  - this.a) * (perimeterTrn  - this.b) * (perimeterTrn  - this.c));
-        return s.toFixed(3);
+        return Number(s.toFixed(3));
     }
 }
 
