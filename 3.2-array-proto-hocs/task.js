@@ -5,7 +5,7 @@ function sleep(milliseconds) {
 
 function sum(...args) {
   // Замедление на половину секунды.
-  sleep(100); // Можно использовать другое значение замедления.
+  sleep(0); // Можно использовать другое значение замедления.
   return args.reduce((sum, arg) => {
     return (sum += arg);
   }, 0);
@@ -37,7 +37,7 @@ mSum(5, 1);
 mSum(3, 4);
 
 
-/*function testCase(testFunction, timerProc) {
+function testCase(testFunction, timerProc) {
     let array1 = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4], [2,8,5,3], [4,3] ];
     console.time('timerProc');
     for (let i = 0; i < 100; i++) {
@@ -46,7 +46,7 @@ mSum(3, 4);
     console.timeEnd('timerProc');
 }
 
-testCase(mSum, 'timerProc');*/
+testCase(sum, 'timerProc');
 
 // summ 70762.92895507812ms
 // mSumm 552.091064453125ms
