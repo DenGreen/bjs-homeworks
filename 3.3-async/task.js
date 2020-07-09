@@ -28,20 +28,17 @@ class AlarmClock {
     }
   }
 
-  getCurrentFormattedTime() {
+   getCurrentFormattedTime() {
     let times = new Date();
-    return times.getHours() + ":" + times.getMinutes();
+    return (`${times.getHours()}:${times.getMinutes()}`);;
   }
 
   start() {
       function checkClock(bell) {
-        if (bell.time === getCurrentFormattedTime()) {
-            return bell.callback;
+        if (bell.time === this.getCurrentFormattedTime()) {
+            return bell.callback();
         }
       }
-      function abc() {
-        this.alarmCollection.forEach(checkClock(item));
-      }
-      setInterval(abc(), 10000);
+      setInterval(this.alarmCollection.forEach((item) => checkClock(item)), 1000);
     }
 }
