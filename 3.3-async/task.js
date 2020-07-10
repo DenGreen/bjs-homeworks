@@ -1,7 +1,7 @@
 class AlarmClock {
   constructor() {
     this.alarmCollection = [];
-    this.timerId;
+    this.timerId = null;
   }
 
   addClock(time, callback, id) {
@@ -19,9 +19,9 @@ class AlarmClock {
   }
 
   removeClock(id) {
-    let delId = alarmCollection.findIndex((values) => values.id === id);
+    let delId = this.alarmCollection.findIndex((values) => values.id === id);
     if (delId !== -1) {
-      alarmCollection.splice(delId, 1);
+      this.alarmCollection.splice(delId, 1);
       console.log(`Будильник с id ${id} удален`);
     } else {
       console.log("Будильник с таким id не найден");
@@ -34,11 +34,32 @@ class AlarmClock {
   }
 
   start() {
-      function checkClock(bell) {
+      let checkClock = (bell) => {
         if (bell.time === this.getCurrentFormattedTime()) {
             return bell.callback();
         }
       }
-      setInterval(this.alarmCollection.forEach((item) => checkClock(item)), 1000);
+
+      let enumerationArray = () => {
+        this.alarmCollection.forEach((item) => checkClock(item));
+      }
+      this.timerId = setInterval(enumerationArray, 1000); 
+    }
+
+    stop() {
+      if (this.timerId) {
+        clearInterval(this.timerId);
+        this.timerId = null;
+      }
+    }
+
+    printAlarms() {
+      console.log(`Печать всех будильников в колличестве: ${this.alarmCollection.length}`);
+      this.alarmCollection.forEach((item, i) => console.log(`Будильник №${i+1} заведен на ${item.time}`));
+    }
+
+    clearAlarms() {
+      stop();
+      this.alarmCollection = [];
     }
 }
