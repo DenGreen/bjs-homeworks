@@ -30,7 +30,7 @@ class AlarmClock {
 
    getCurrentFormattedTime() {
     let times = new Date();
-    return (`${times.getHours()}:${times.getMinutes()}`);;
+    return (`${times.getHours()}:${times.getMinutes()}`);
   }
 
   start() {
@@ -62,4 +62,14 @@ class AlarmClock {
       stop();
       this.alarmCollection = [];
     }
+}
+
+let testCase = () => {
+  let phoneAlarm = new AlarmClock();
+  phoneAlarm.addClock("17:57", () => console.log("Пора вставать"),1);
+  phoneAlarm.addClock("17:53", () => console.log("Пора вставать"),1);
+  phoneAlarm.addClock("17:58", () => {console.log("Давай вставай уже"); phoneAlarm.removeClock(2)},2);
+  phoneAlarm.addClock("17:59", () => {console.log("Вставай а то проспишь!"); phoneAlarm.clearAlarms(); phoneAlarm.printAlarms()},3);
+  phoneAlarm.printAlarms();
+  phoneAlarm.start();
 }
