@@ -30,7 +30,9 @@ class AlarmClock {
 
    getCurrentFormattedTime() {
     let times = new Date();
-    return (`${times.getHours()}:${times.getMinutes()}`);
+    let hours = `${times.getHours()}`.length === 1 ? '0' + times.getHours(): `${times.getHours()}`;
+    let minutes = `${times.getMinutes()}`.length === 1 ? '0' + times.getMinutes()(): `${times.getMinutes()}`;
+    return (hours + ':' + minutes);
   }
 
   start() {
@@ -66,10 +68,10 @@ class AlarmClock {
 
 let testCase = () => {
   let phoneAlarm = new AlarmClock();
-  phoneAlarm.addClock("17:57", () => console.log("Пора вставать"),1);
-  phoneAlarm.addClock("17:53", () => console.log("Пора вставать"),1);
-  phoneAlarm.addClock("17:58", () => {console.log("Давай вставай уже"); phoneAlarm.removeClock(2)},2);
-  phoneAlarm.addClock("17:59", () => {console.log("Вставай а то проспишь!"); phoneAlarm.clearAlarms(); phoneAlarm.printAlarms()},3);
+  phoneAlarm.addClock("11:18", () => console.log("Пора вставать"),1);
+  phoneAlarm.addClock("11:18", () => console.log("Пора вставать"),1);
+  phoneAlarm.addClock("11:19", () => {console.log("Давай вставай уже"); phoneAlarm.removeClock(2)},2);
+  phoneAlarm.addClock("11:20", () => {console.log("Вставай а то проспишь!"); phoneAlarm.clearAlarms(); phoneAlarm.printAlarms()},3);
   phoneAlarm.printAlarms();
   phoneAlarm.start();
 }
